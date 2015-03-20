@@ -4,8 +4,8 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='cornet',
-    version='0.1rc1',
+    name='odata2avro',
+    version='0.1a',
     author='Marcel Krcah, Daan Debie',
     author_email='marcel.krcah@gmail.com, debie.daan@gmail.com',
     description='Convert OData to Avro',
@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     entry_points={
-        # 'console_scripts': ['tbd=tbd.main:cli']
+        'console_scripts': ['odata2avro=odata2avro.main:cli']
     },
     install_requires=requirements,
     classifiers=[
