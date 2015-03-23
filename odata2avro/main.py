@@ -33,6 +33,7 @@ ODATA_TO_AVRO_TYPE = {
     'Edm.DateTimeOffset': 'string'
 }
 
+
 class ODataProperty():
     def __init__(self, xml_elem):
         self.elem = xml_elem
@@ -57,7 +58,6 @@ class ODataProperty():
             return float(val)
         elif avro_type == 'boolean':
             return bool(val)
-
 
     def is_null(self):
         return self.elem.attrib.get(NS_M+'null', 'false') == 'true'
@@ -106,7 +106,6 @@ def xml_to_avro(xml_tree, avsc, output_avro_file):
             writer.append(record)
 
 
-
 @click.command()
 @click.argument('input_odata_xml_file', type=click.Path(exists=True))
 @click.argument('output_avro_file', type=click.Path())
@@ -120,6 +119,3 @@ def cli(input_odata_xml_file, output_avro_file, output_avro_schema):
         with open(output_avro_schema, 'w') as outfile:
             json.dump(avsc, outfile)
         xml_to_avro(xml_tree, avsc, output_avro_file)
-
-
-
