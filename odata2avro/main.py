@@ -108,9 +108,9 @@ def xml_to_avro(xml_tree, avsc, output_avro_file):
 
 @click.command()
 @click.argument('input_odata_xml_file', type=click.Path(exists=True))
-@click.argument('output_avro_file', type=click.Path())
 @click.argument('output_avro_schema', type=click.Path())
-def cli(input_odata_xml_file, output_avro_file, output_avro_schema):
+@click.argument('output_avro_file', type=click.Path())
+def cli(input_odata_xml_file, output_avro_schema, output_avro_file):
     with open(input_odata_xml_file, 'r') as f:
         xml_as_string = f.read()
         xml_tree = ElementTree.fromstring(xml_as_string)
