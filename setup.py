@@ -5,12 +5,12 @@ with open('requirements.txt') as f:
 
 setup(
     name='odata2avro',
-    version='0.1a',
+    version='0.1b',
     author='Marcel Krcah, Daan Debie',
     author_email='marcel.krcah@gmail.com, debie.daan@gmail.com',
-    description='Convert OData to Avro',
+    description='Convert OData datasets to Avro',
     license='MIT',
-    keywords='opendata avro hadoop',
+    keywords='azure odata avro impala hive hadoop',
     url='https://github.com/datadudes/odata2avro',
     packages=find_packages(),
     include_package_data=True,
@@ -20,9 +20,9 @@ setup(
     install_requires=requirements,
     classifiers=[
         # 'Development Status :: 1 - Planning',
-        'Development Status :: 2 - Pre-Alpha',
+        # 'Development Status :: 2 - Pre-Alpha',
         # 'Development Status :: 3 - Alpha',
-        # 'Development Status :: 4 - Beta',
+        'Development Status :: 4 - Beta',
         # 'Development Status :: 5 - Production/Stable',
         # 'Development Status :: 6 - Mature',
         # 'Development Status :: 7 - Inactive',
