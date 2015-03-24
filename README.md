@@ -9,7 +9,7 @@ Hadoop tooling, it should be very simple to ingest OData data from
 ### Usage:
 
 ```
-odata2avro ODATA_XML AVRO_SCHEMA AVRO_FILE
+$ odata2avro ODATA_XML AVRO_SCHEMA AVRO_FILE
 ```
 
 This command reads data from `ODATA_XML` and creates two files: `AVRO_SCHEMA`
@@ -20,29 +20,37 @@ This command reads data from `ODATA_XML` and creates two files: `AVRO_SCHEMA`
 
 ```
 # Download OData data in XML format
-curl 'https://api.datamarket.azure.com/opendata.rdw/VRTG.Open.Data/v1/KENT_VRTG_O_DAT?$top=100' > cars.xml
+$ curl 'https://api.datamarket.azure.com/opendata.rdw/VRTG.Open.Data/v1/KENT_VRTG_O_DAT?$top=100' > cars.xml
 
 # Convert data to Avro
-odata2avro cars.xml cars.avsc cars.avro
+$ odata2avro cars.xml cars.avsc cars.avro
 
 # Upload to HDFS
-hdfs dfs -put cars.avro cars.avsc /tmp
+$ hdfs dfs -put cars.avro cars.avsc /tmp
 
-# Create Hive/Impala table - notice no need to manually specify table schema
-hive -e "
+# Create Avro-backed Hive table using Avro schema stored in /tmp/cars.avsc
+$ hive -e "
   CREATE TABLE cars
   ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
   STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
   OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
-  TBLPROPERTIES ('avro.schema.url'='hdfs://ip-address/tmp/cars.avsc');"
+  TBLPROPERTIES ('avro.schema.url'='hdfs:///tmp/cars.avsc');"
 
-# Load data to the Cars table from the Avro file
-hive -e "LOAD DATA INPATH '/tmp/cars.avro' INTO TABLE cars"
+# Load data from /tmp/cars.avro to the cars table
+$ hive -e "LOAD DATA INPATH '/tmp/cars.avro' INTO TABLE cars"
+
+# Query with Impala
+$ impala-shell -i <impala-daemon-ip> -q "REFRESH cars; select count(*) from cars"
++----------+
+| count(*) |
++----------+
+|      100 |
++----------+
 ```
 
 ### Installation:
 
-`pip install odata2avro --pre`
+`pip install odata2avro`
 
 
 ### Contributions:
