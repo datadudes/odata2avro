@@ -2,8 +2,8 @@ odata2avro [![Build Status](https://travis-ci.org/datadudes/odata2avro.svg?branc
 =====
 
 odata2avro is a Python command-line tool to automatically
-convert OData datasets to Avro. Using `odata2avro`, it should be very
-simple to ingest OData data from
+convert OData datasets to Avro. Using `odata2avro` together with standard
+Hadoop tooling, it should be very simple to ingest OData data from
 [Microsoft Azure DataMarket](https://datamarket.azure.com/browse/data) to Hadoop.
 
 ### Usage:
@@ -52,6 +52,6 @@ We'll try to get back to you as soon as possible.
 
 ### Authors:
 
-Created by passion by [Marcel](https://github.com/mkrcah)
+Created with passion by [Marcel](https://github.com/mkrcah)
 and [Daan](https://github.com/DandyDev).
 
