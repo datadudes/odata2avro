@@ -57,7 +57,9 @@ class ODataProperty():
         elif avro_type == 'double':
             return float(val)
         elif avro_type == 'boolean':
-            return bool(val)
+            return True if val == 'true' else False
+        else:
+            assert False, "Unknown AVRO type '{0}'".format(avro_type)
 
     def is_null(self):
         return self.elem.attrib.get(NS_M+'null', 'false') == 'true'
@@ -98,12 +100,28 @@ def get_records_from(xml_tree):
         yield record
 
 
-def xml_to_avro(xml_tree, avsc, output_avro_file):
+def save_avro_schema(avsc, output_file):
+    with open(output_file, 'w') as outfile:
+        json.dump(avsc, outfile)
+
+
+def save_xml_to_avro(xml_tree, avsc, output_file):
     schema = avro.schema.parse(json.dumps(avsc))
-    with open(output_avro_file, 'w') as output_file:
+    with open(output_file, 'w') as output_file:
         writer = DataFileWriter(output_file, DatumWriter(), schema)
         for record in get_records_from(xml_tree):
             writer.append(record)
+        writer.close()
+
+
+def main(xml_file, avro_schema, avro_file):
+    with open(xml_file, 'r') as f:
+        xml_as_string = f.read()
+        xml_tree = ElementTree.fromstring(xml_as_string)
+        schema = parse_schema(xml_tree)
+        avsc = schema_to_avsc(schema)
+        save_avro_schema(avsc, avro_schema)
+        save_xml_to_avro(xml_tree, avsc, avro_file)
 
 
 @click.command()
@@ -111,11 +129,4 @@ def xml_to_avro(xml_tree, avsc, output_avro_file):
 @click.argument('output_avro_schema', type=click.Path())
 @click.argument('output_avro_file', type=click.Path())
 def cli(input_odata_xml_file, output_avro_schema, output_avro_file):
-    with open(input_odata_xml_file, 'r') as f:
-        xml_as_string = f.read()
-        xml_tree = ElementTree.fromstring(xml_as_string)
-        schema = parse_schema(xml_tree)
-        avsc = schema_to_avsc(schema)
-        with open(output_avro_schema, 'w') as outfile:
-            json.dump(avsc, outfile)
-        xml_to_avro(xml_tree, avsc, output_avro_file)
+    main(input_odata_xml_file, output_avro_schema, output_avro_file)

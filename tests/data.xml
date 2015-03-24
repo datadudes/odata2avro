@@ -16,11 +16,33 @@
         <content type="application/xml">
             <m:properties>
                 <d:Vermogen m:type="Edm.Int16" m:null="true"/>
-                <d:Aantalcilinders m:type="Edm.Int16">4</d:Aantalcilinders>
+                <d:Aantalcilinders m:type="Edm.Double">4.5</d:Aantalcilinders>
                 <d:BPM m:type="Edm.Int32" m:null="true"/>
                 <d:Eerstekleur>GRIJS</d:Eerstekleur>
                 <d:Zuinigheidslabel m:null="true"/>
+                <d:Groen m:type="Edm.Boolean">false</d:Groen>
             </m:properties>
         </content>
     </entry>
+    <entry>
+        <id>https://api.datamarket.azure.com/Data.ashx/opendata.rdw/VRTG.Open.Data/v1/KENT_VRTG_O_DAT('0001E2')</id>
+        <category term="opendata.rdw.VRTG.Open.Data.KENT_VRTG_O_DAT" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link rel="edit" title="KENT_VRTG_O_DAT" href="KENT_VRTG_O_DAT('0001E2')"/>
+        <title/>
+        <updated>2015-03-20T13:02:31Z</updated>
+        <author>
+            <name/>
+        </author>
+        <content type="application/xml">
+            <m:properties>
+                <d:Vermogen m:type="Edm.Int16">10</d:Vermogen>
+                <d:Aantalcilinders m:type="Edm.Double">5.1</d:Aantalcilinders>
+                <d:BPM m:type="Edm.Int32" m:null="true"/>
+                <d:Eerstekleur>GRIJS2</d:Eerstekleur>
+                <d:Zuinigheidslabel>Test</d:Zuinigheidslabel>
+                <d:Groen m:type="Edm.Boolean">true</d:Groen>
+            </m:properties>
+        </content>
+    </entry>
+
 </feed>
