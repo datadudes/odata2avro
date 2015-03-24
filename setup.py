@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='odata2avro',
-    version='0.1.1b',
+    version='1.0.0',
     author='Marcel Krcah, Daan Debie',
     author_email='marcel.krcah@gmail.com, debie.daan@gmail.com',
     description='Convert OData datasets to Avro',
@@ -22,8 +22,8 @@ setup(
         # 'Development Status :: 1 - Planning',
         # 'Development Status :: 2 - Pre-Alpha',
         # 'Development Status :: 3 - Alpha',
-        'Development Status :: 4 - Beta',
-        # 'Development Status :: 5 - Production/Stable',
+        # 'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         # 'Development Status :: 6 - Mature',
         # 'Development Status :: 7 - Inactive',
         'Environment :: Console',
